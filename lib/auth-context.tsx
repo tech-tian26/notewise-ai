@@ -21,32 +21,49 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(null)
+  // const [user, setUser] = useState<User | null>(null)
+  const [user, setUser] = useState<User | null>({
+    id: "demo",
+    name: "Demo User",
+    email: "demo@noteai.com",
+    avatar: "",
+    createdAt: new Date().toISOString(),
+  })
   const [isLoading, setIsLoading] = useState(false)
 
-  const login = useCallback(async (email: string, password: string) => {
-    setIsLoading(true)
+  // const login = useCallback(async (email: string, password: string) => {
+  //   setIsLoading(true)
 
-    try {
-      const res = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      })
+  //   try {
+  //     const res = await fetch("/api/auth/login", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({ email, password }),
+  //     })
 
-      const data = await res.json()
+  //     const data = await res.json()
 
-      if (!res.ok) {
-        throw new Error(data.error || "Login failed")
-      }
+  //     if (!res.ok) {
+  //       throw new Error(data.error || "Login failed")
+  //     }
 
-      localStorage.setItem("token", data.token)
-      setUser(data.user)
-    } finally {
-      setIsLoading(false)
-    }
+  //     localStorage.setItem("token", data.token)
+  //     setUser(data.user)
+  //   } finally {
+  //     setIsLoading(false)
+  //   }
+  // }, [])
+
+  const login = useCallback(async () => {
+    setUser({
+      id: "demo",
+      name: "Demo User",
+      email: "demo@noteai.com",
+      avatar: "",
+      createdAt: new Date().toISOString(),
+    })
   }, [])
 
   const signup = useCallback(
@@ -76,9 +93,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     []
   )
 
+  // const logout = useCallback(() => {
+  //   localStorage.removeItem("token")
+  //   setUser(null)
+  // }, [])
   const logout = useCallback(() => {
-    localStorage.removeItem("token")
-    setUser(null)
+    // disabled for demo
   }, [])
 
   return (

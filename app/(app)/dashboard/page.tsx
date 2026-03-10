@@ -7,7 +7,8 @@ import { WeakTopics } from "@/components/dashboard/weak-topics"
 import { RecentActivity } from "@/components/dashboard/recent-activity"
 
 export default function DashboardPage() {
-  const { user } = useAuth()
+  // const { user } = useAuth()
+  const user = { name: "Student" } // demo
 
   return (
     <div className="flex flex-col gap-6">
