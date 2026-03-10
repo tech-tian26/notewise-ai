@@ -12,6 +12,7 @@ import type { Quiz, QuizAttempt } from "@/lib/types"
 import { Brain, Plus, Play } from "lucide-react"
 import { toast } from "sonner"
 
+export const dynamic = "force-dynamic";
 type ViewMode = "list" | "playing" | "results"
 
 const difficultyColors: Record<string, string> = {
